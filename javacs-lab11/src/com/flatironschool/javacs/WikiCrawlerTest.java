@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.flatironschool.javacs;
 
@@ -33,7 +33,7 @@ public class WikiCrawlerTest {
 	public void setUp() throws Exception {
 		// make a WikiCrawler
 		jedis = JedisMaker.make();
-		index = new JedisIndex(jedis); 
+		index = new JedisIndex(jedis);
 		String source = "https://en.wikipedia.org/wiki/Java_(programming_language)";
 		wc = new WikiCrawler(source, index);
 
@@ -53,25 +53,25 @@ public class WikiCrawlerTest {
 
 	/**
 	 * Test method for {@link com.flatironschool.javacs.WikiCrawler#crawl()}.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@Test
 	public void testCrawl() throws IOException {
 		String url1 = "https://en.wikipedia.org/wiki/Java_(programming_language)";
 		String url2 = "https://en.wikipedia.org/wiki/Programming_language";
 		String url3 = "https://en.wikipedia.org/wiki/Concurrent_computing";
-		
+
 		String res = wc.crawl(true);
 		assertThat(url1.equals(res), is(true));
-		assertThat(wc.queueSize(), is(398));
+		assertThat(wc.queueSize(), is(399));
 
 		res = wc.crawl(true);
 		assertThat(url2.equals(res), is(true));
-		assertThat(wc.queueSize(), is(655));
+		assertThat(wc.queueSize(), is(656));
 
 		res = wc.crawl(true);
 		assertThat(url3.equals(res), is(true));
-		assertThat(wc.queueSize(), is(706));
+		assertThat(wc.queueSize(), is(707));
 
 		Map<String, Integer> map = index.getCounts("the");
 
